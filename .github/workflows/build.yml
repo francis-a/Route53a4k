@@ -36,9 +36,10 @@ jobs:
           detailed_summary: true
 
       - uses: anothrNick/github-tag-action@v1
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && github.ref_type != 'tag'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
 
       - uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
