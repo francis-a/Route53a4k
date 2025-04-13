@@ -44,3 +44,4 @@ bin/
 ### Mac OS ###
 .DS_Store
 /config/route53a4k.properties
+/.idea/
