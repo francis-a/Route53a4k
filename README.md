@@ -41,3 +41,5 @@ To interact with Route 53, your AWS credentials must allow:
 route53:ChangeResourceRecordSets
 route53:ListResourceRecordSets
 ```
+
+A CloudFormation template is included in the project for creating a user and access key with the required permissions.
