@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  A CloudFormation template that can be used to create the IAM policy needed
+  to update a Route53 record and an associated IAM user. The access key and secret will be displayed as outputs
+
+Parameters:
+  HostedZoneId:
+    Description: The ID of the hosted zone that includes the domain that should be dynamically updated
+    Type: String
+Resources:
+  Route53a4kUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: 'Route53a4k-generated-IAM-user'
+
+  UpdateRoute53RecordPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: 'Route53a4k-update-record-set'
+      Users:
+        - !Ref Route53a4kUser
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - route53:ChangeResourceRecordSets
+              - route53:ListResourceRecordSets
+            Resource:
+              - !Sub "arn:aws:route53:::hostedzone/${HostedZoneId}"
+
+  Route53a4kUserKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      Status: Active
+      UserName: !Ref Route53a4kUser
+
+Outputs:
+  Route53a4kUserAccessKey:
+    Value: !Ref Route53a4kUserKey
+  Route53a4kUserAccessSecret:
+    Value: !GetAtt Route53a4kUserKey.SecretAccessKey
