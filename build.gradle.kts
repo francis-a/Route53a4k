@@ -1,7 +1,11 @@
+import org.panteleyev.jpackage.ImageType.APP_IMAGE
+
 plugins {
     kotlin("jvm") version "2.1.10"
     application
+    id("org.panteleyev.jpackageplugin") version "1.6.1"
 }
+
 
 group = "net.eyecu.dyn.route53a4k"
 version = "0-SNAPSHOT"
@@ -28,6 +32,7 @@ dependencies {
 }
 
 application {
+    applicationName = "Route53a4k"
     mainClass.set("net.eyecu.dyn.Route53a4k")
 }
 
@@ -46,11 +51,27 @@ tasks {
     }
 
     jar {
-        archiveClassifier = "app"
+        archiveClassifier = ""
+        version = ""
+        archiveBaseName = ""
+        archiveFileName = "${application.applicationName}.jar"
         from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         manifest {
             attributes(mapOf("Main-Class" to application.mainClass))
         }
     }
+
+    jpackage {
+        appName = application.applicationName
+
+        version = ""
+        mainClass = application.mainClass.get()
+        mainJar = jar.get().archiveFileName.get()
+
+        destination = layout.buildDirectory.dir("jpackage").get().asFile.absolutePath
+        type = APP_IMAGE
+        removeDestination = true
+    }
+
 }
