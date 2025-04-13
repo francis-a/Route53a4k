@@ -19,7 +19,7 @@ dependencies {
     implementation("org.jobrunr:jobrunr:7.4.1")
     implementation("software.amazon.awssdk:route53:2.31.21")
     implementation("software.amazon.awssdk:sts:2.30.26")
-    implementation("org.slf4j:slf4j-simple:2.0.16")
+    implementation("org.slf4j:slf4j-simple:2.0.17")
 
     testImplementation(kotlin("test"))
     testImplementation(platform("org.junit:junit-bom:5.12.0"))
