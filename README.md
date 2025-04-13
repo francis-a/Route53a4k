@@ -3,6 +3,15 @@
 **Route53a4k** is a Kotlin-based command-line application designed to dynamically update an AWS Route 53 DNS record to
 match your current host's IP address.
 
+## 🚀Download and Run
+
+Select the latest release from GitHub; each release contains two ways to run the application. 
+
+The first is a `jar` that can be run directly.
+
+The second is a `zip` or `tar` that can be extracted.
+Inside there is a `bin` folder with a shell script or `bat` file that can be used to run the application.
+
 ## 🔧 Features
 
 - **Initialize Configuration**
