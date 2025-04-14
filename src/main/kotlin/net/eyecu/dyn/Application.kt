@@ -24,7 +24,7 @@ class Application(
     fun run(configurationProperties: ConfigurationProperties, route53Client: Route53Client) {
         logger.info("Attempting DNS record update")
         val result = updatedHostedZoneIp(configurationProperties, route53Client)
-        logger.info(result.toString())
+        println(result)
     }
 
     fun hostedZoneIsAccessible(configurationProperties: ConfigurationProperties, route53Client: Route53Client) =
@@ -51,7 +51,7 @@ class Application(
 
         return configurationProperties.buildOperatorResult(
             success = true,
-            ipUpdated = currentHostedZoneIp == ipAddress,
+            ipUpdated = currentHostedZoneIp != ipAddress,
             localIpAddress = ipAddress
         )
     }
@@ -115,6 +115,11 @@ data class ConfigurationProperties(
     val useDefaultCredentialProviderChain: Boolean,
 )
 
+private const val RED = "\u001B[31m"
+private const val GREEN = "\u001B[32m"
+private const val BLUE = "\u001B[34m"
+private const val RESET = "\u001B[0m"
+
 data class OperationResult(
     val hostedZoneId: String,
     val hostName: String,
@@ -124,13 +129,14 @@ data class OperationResult(
 ) {
     private val logLine = """
         ====================================
-        Hosted zone update operation result.
+        Hosted zone update operation result:
         host name =         $hostName
-        hosted zone id =    $hostedZoneId  
-        success =           $success     
+        hosted zone id =    $hostedZoneId             
         update performed =  $ipUpdated
+        ${if(success) { GREEN } else { RED }}success =           $success$RESET
         ====================================
-        ${operation(success, ipUpdated, localIpAddress)}
+       
+        $BLUE==> ${operation(success, ipUpdated, localIpAddress)}$RESET
     """.trimIndent()
 
     companion object {
