@@ -24,7 +24,7 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation(platform("org.junit:junit-bom:5.12.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("io.mockk:mockk-jvm:1.13.17") {
+    testImplementation("io.mockk:mockk-jvm:1.14.0") {
         exclude(group = "junit", module = "junit")
         exclude(group = "org.junit.jupiter", module = "junit-jupiter")
     }
