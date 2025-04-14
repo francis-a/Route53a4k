@@ -20,6 +20,7 @@ class ApplicationTest {
         hostname = "test.example.com.",
         awsAccessKeyId = "a",
         awsAccessSecret = "b",
+        awsRegion = null,
         useDefaultCredentialProviderChain = true
     )
 
