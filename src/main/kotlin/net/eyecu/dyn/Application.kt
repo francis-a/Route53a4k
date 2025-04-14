@@ -109,6 +109,7 @@ class Application(
 data class ConfigurationProperties(
     val hostedZoneId: String,
     val hostname: String,
+    val awsRegion: String?,
     val awsAccessKeyId: String,
     val awsAccessSecret: String,
     val useDefaultCredentialProviderChain: Boolean,

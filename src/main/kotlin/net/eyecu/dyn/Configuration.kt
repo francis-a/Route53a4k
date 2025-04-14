@@ -21,6 +21,7 @@ class Configuration {
 
         val hostedZoneId = properties.getProperty(HOSTED_ZONE_ID) ?: return null
         val hostname = properties.getProperty(HOSTNAME) ?: return null
+        val awsRegion = properties.getProperty(AWS_REGION)
         val awsAccessKeyId = properties.getProperty(AWS_ACCESS_KEY_ID) ?: return null
         val awsAccessSecret = properties.getProperty(AWS_ACCESS_SECRET) ?: return null
         val useDefaultCredentialProviderChain =
@@ -29,6 +30,7 @@ class Configuration {
 
         return ConfigurationProperties(
             hostedZoneId = hostedZoneId,
+            awsRegion = awsRegion,
             awsAccessKeyId = awsAccessKeyId,
             awsAccessSecret = awsAccessSecret,
             useDefaultCredentialProviderChain = useDefaultCredentialProviderChain,
@@ -39,6 +41,7 @@ class Configuration {
     fun createConfigurationProperties(
         hostedZoneId: String,
         hostname: String,
+        awsRegion: String,
         awsAccessKeyId: String,
         awsAccessSecret: String,
         useDefaultCredentialProviderChain: Boolean
@@ -50,6 +53,7 @@ class Configuration {
             setProperty(HOSTED_ZONE_ID, hostedZoneId)
             setProperty(HOSTNAME, hostname)
             setProperty(USE_DEFAULT_PROVIDER_CHAIN, useDefaultCredentialProviderChain.toString())
+            setProperty(AWS_REGION, awsRegion)
             setProperty(AWS_ACCESS_KEY_ID, awsAccessKeyId)
             setProperty(AWS_ACCESS_SECRET, awsAccessSecret)
         }
@@ -71,6 +75,7 @@ class Configuration {
         const val HOSTED_ZONE_ID = "hosted.zone.id"
         const val HOSTNAME = "hostname"
         const val USE_DEFAULT_PROVIDER_CHAIN = "use.default.credential.provider.chain"
+        const val AWS_REGION = "aws.region"
         const val AWS_ACCESS_KEY_ID = "aws.access.key.id"
         const val AWS_ACCESS_SECRET = "aws.access.secret"
     }

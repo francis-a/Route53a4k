@@ -14,6 +14,7 @@ import com.github.ajalt.clikt.parameters.types.boolean
 import org.jobrunr.scheduling.cron.CronExpression
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider
+import software.amazon.awssdk.regions.Region
 import software.amazon.awssdk.services.route53.Route53Client
 
 class Route53a4kApplication : CliktCommand() {
@@ -80,6 +81,11 @@ class Init(
                     "If set an awsAccessKeyId and awsAccessSecret do not need to be provided."
         )
 
+    private val awsRegion by option()
+        .optionalValue("")
+        .prompt("AWS Region")
+        .help("AWS Region, if not set the `AWS_REGION` environment variable will be used.")
+
     private val awsAccessSecret by option()
         .optionalValue("")
         .prompt("AWS Access Secret")
@@ -114,6 +120,7 @@ class Init(
     override fun run() {
         configuration.createConfigurationProperties(
             hostedZoneId = hostedZoneId,
+            awsRegion = awsRegion,
             awsAccessKeyId = awsAccessKeyId,
             awsAccessSecret = awsAccessSecret,
             useDefaultCredentialProviderChain = useDefaultAwsProviderChain,
@@ -146,6 +153,10 @@ private fun ConfigurationProperties.getSdk(): Route53Client {
                     .build()
             )
         )
+    }
+
+    if(!awsRegion.isNullOrBlank()) {
+        builder.region(Region.of(awsRegion))
     }
 
     return builder.build()
