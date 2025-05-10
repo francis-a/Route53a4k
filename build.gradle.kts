@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     implementation("com.github.ajalt.clikt:clikt:5.0.3")
-    implementation("org.jobrunr:jobrunr:7.4.1")
+    implementation("org.jobrunr:jobrunr:7.5.1")
     implementation("software.amazon.awssdk:route53:2.31.35")
     implementation("software.amazon.awssdk:sts:2.31.40")
     implementation("org.slf4j:slf4j-simple:2.0.17")
