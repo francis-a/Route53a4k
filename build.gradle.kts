@@ -18,7 +18,7 @@ dependencies {
     implementation("com.github.ajalt.clikt:clikt:5.0.3")
     implementation("org.jobrunr:jobrunr:7.5.1")
     implementation("software.amazon.awssdk:route53:2.31.50")
-    implementation("software.amazon.awssdk:sts:2.31.40")
+    implementation("software.amazon.awssdk:sts:2.31.54")
     implementation("org.slf4j:slf4j-simple:2.0.17")
 
     testImplementation(kotlin("test"))
